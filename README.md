@@ -1,4 +1,4 @@
-## tiny-swapi-client
+## Tiny SWAPI client
 
 This is a very simple test of a client for SWAPI.co showing all people with their species and some information.
 
