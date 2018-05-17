@@ -2,7 +2,7 @@
 
 This is a very simple test of a client for SWAPI.co showing all people with their species and some information.
 
-This project is powered with Vue.js, axios, buefy, lodash, vuex and SWAPI
+This project is powered with Vue.js, axios, buefy, lodash, vuex, SWAPI and fontawesome.
 
 [Demo](https://emiliogrv.github.io/tiny-swapi-client/)
 
