@@ -1,21 +1,18 @@
 <template>
   <section class="container">
-    <b-table :data="people"
+    <b-table v-show="!detail"
+             :data="people"
              paginated
              :per-page="15"
              :loading="loading"
              default-sort-direction="asc"
-             default-sort="name"
-             detailed
-             detail-key="name"
-             :opened-detailed="defaultOpenedDetails"
-             @details-open="(row) => defaultOpenedDetails = [row.name]">
+             default-sort="name">
       <template slot-scope="props">
         <b-table-column field="name"
                         label="Name"
                         sortable>
           <a href=""
-             @click.prevent="defaultOpenedDetails = [props.row.name]"
+             @click.prevent="detail = props.row"
              v-text="props.row.name" />
         </b-table-column>
 
@@ -32,36 +29,6 @@
         </b-table-column>
       </template>
 
-      <template slot="detail"
-                slot-scope="props">
-        <div class="columns">
-          <div class="column">
-            <p>
-              <b>Height:</b> {{ props.row.height }}
-            </p>
-            <p>
-              <b>Mass:</b> {{ props.row.mass }}
-            </p>
-          </div>
-          <div class="column">
-            <p>
-              <b>Hair color:</b> {{ props.row.hair_color }}
-            </p>
-            <p>
-              <b>Skin color:</b> {{ props.row.skin_color }}
-            </p>
-          </div>
-          <div class="column">
-            <p>
-              <b>Eye color:</b> {{ props.row.eye_color }}
-            </p>
-            <p>
-              <b>Birth year:</b> {{ props.row.birth_year }}
-            </p>
-          </div>
-        </div>
-      </template>
-
       <template slot="empty">
         <section class="section">
           <div class="content has-text-grey has-text-centered">
@@ -70,11 +37,54 @@
                       size="is-large">
               </b-icon>
             </p>
-            <p>Sin datos para mostrar.</p>
+            <p>Nothing here.</p>
           </div>
         </section>
       </template>
     </b-table>
+
+    <div v-if="detail"
+         key="detail">
+      <button class="button"
+              @click.prevent="detail = null">Back</button>
+
+      <br>
+
+      <div class="columns">
+        <div class="column">
+          <p>
+            <b>Name:</b> {{ detail.name }}
+          </p>
+          <p>
+            <b>Species:</b> {{ detail.species }}
+          </p>
+          <p>
+            <b>Gender:</b>
+            <b-tooltip :label="detail.gender">
+              <b-icon :icon="iconGender(detail.gender)" />
+            </b-tooltip>
+          </p>
+          <p>
+            <b>Height:</b> {{ detail.height }}
+          </p>
+          <p>
+            <b>Mass:</b> {{ detail.mass }}
+          </p>
+          <p>
+            <b>Hair color:</b> {{ detail.hair_color }}
+          </p>
+          <p>
+            <b>Skin color:</b> {{ detail.skin_color }}
+          </p>
+          <p>
+            <b>Eye color:</b> {{ detail.eye_color }}
+          </p>
+          <p>
+            <b>Birth year:</b> {{ detail.birth_year }}
+          </p>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -89,7 +99,7 @@ export default {
       loading: false,
       people: [],
       species: [],
-      defaultOpenedDetails: []
+      detail: null
     }
   },
   created() {
@@ -145,4 +155,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.container {
+  min-height: 757px;
+}
+</style>
 
