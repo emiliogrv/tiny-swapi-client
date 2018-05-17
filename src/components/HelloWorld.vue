@@ -140,13 +140,13 @@ export default {
     iconGender(gender = 'n/a') {
       switch (gender.toLowerCase()) {
         case 'female':
-          return 'mars'
+          return 'venus'
 
         case 'hermaphrodite':
           return 'venus-mars'
 
         case 'male':
-          return 'venus'
+          return 'mars'
 
         default:
           return 'question'
